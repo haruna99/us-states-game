@@ -9,7 +9,6 @@ turtle.shape(image)
 
 states = pd.read_csv("50_states.csv")
 choices = []
-missed_states = []
 
 while len(choices) < 50:
 
@@ -18,9 +17,7 @@ while len(choices) < 50:
         answer_state = answer_state.title()
     if answer_state == 'Exit':
         all_states = states["state"].to_list()
-        for missed_state in all_states:
-            if missed_state not in choices:
-                missed_states.append(missed_state)
+        missed_states = [state for state in all_states if state not in choices]
         all_missed_states = pd.DataFrame(missed_states)
         all_missed_states.to_csv("states_to_learn.csv")
         break
